@@ -4,14 +4,14 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker-compose build
+                sudo docker-compose build
                 '''
             }
         }
         stage('Deploy') {
             steps {
                 sh '''
-                docker-compose down
+                sudo docker-compose down
                 sudo docker-compose up -d
                 '''
             }
@@ -19,7 +19,7 @@ pipeline {
         stage('Clean up') {
             steps {
                 sh '''
-                docker system prune --force
+                sudo docker system prune --force
                 '''
             }
         }
