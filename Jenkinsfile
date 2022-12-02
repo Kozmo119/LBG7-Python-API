@@ -4,22 +4,22 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker-compose build
+                docker build -t python-api .
                 '''
             }
         }
         stage('Deploy') {
             steps {
                 sh '''
-                docker-compose down
-                docker-compose up -d
+                python lbg.test.py
                 '''
             }
         }
         stage('Clean up') {
             steps {
                 sh '''
-                docker system prune --force
+                docker-compose down
+                docker-compose up -d
                 '''
             }
         }
